@@ -640,6 +640,9 @@ WebIDL::ExceptionOr<void> XMLHttpRequest::send(Optional<DocumentOrXMLHttpRequest
                 m_author_request_headers->set(move(header));
             }
         }
+    } else {
+        // Otherwise, clear m_request_body.
+        m_request_body = nullptr;
     }
 
     // 5. If one or more event listeners are registered on this’s upload object, then set this’s upload listener flag.

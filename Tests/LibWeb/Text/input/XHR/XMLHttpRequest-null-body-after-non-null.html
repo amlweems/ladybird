@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<script src="../include.js"></script>
+<script>
+    asyncTest((done) => {
+        const xhr = new XMLHttpRequest()
+
+        function check(method, url, next) {
+            xhr.onload = () => {
+                println(method + ' ' + xhr.status)
+                next()
+            }
+            xhr.open(method, url, true)
+            xhr.send('data')
+        }
+
+        check('POST', 'data:text/plain,', () => {
+            check('GET', 'https://httpbin.org/status/200', done)
+        })
+    });
+</script>
